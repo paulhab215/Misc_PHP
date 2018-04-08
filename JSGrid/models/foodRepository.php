@@ -34,7 +34,7 @@ class foodRepository {
         return $this->read($rows[0]);
     }
 
-    public function getAll($filter) {
+    public function getAll() {
         // $name = "%" . $filter["name"] . "%";
         // $address = "%" . $filter["street"] . "%";
         // $country_id = $filter["zip"];
@@ -52,12 +52,10 @@ class foodRepository {
         $q->bindParam(":type", $type);
         $q->bindParam(":rank", $rank);
         $q->execute();
-                    error_log($sql, 3, "../errors.txt");
-
         $rows = $q->fetchAll();
         $result = array();
+
         foreach($rows as $row) {
-            error_log($row, 3, "../errors.txt");
             array_push($result, $this->read($row));
         }
         return $result;
@@ -66,15 +64,15 @@ class foodRepository {
     public function insert($data) {
         $sql = "INSERT INTO food (name, street, secondary_street, city, zip) VALUES (:name, :street, :secondary_street, :city, :zip)";
         $q = $this->db->prepare($sql);
-        $q->bindParam(":name", $data]'name']);
-        $q->bindParam(":street", $data]'street']);
-        $q->bindParam(":secondary_street", $data]'secondary_street']);
-        $q->bindParam(":city", $data]'city']);
-        $q->bindParam(":zip", $data]'zip']);
-        // $q->bindParam(":bio", $data]'bio']);
-        // $q->bindParam(":yelp_link", $data]'yelp_link']);
-        // $q->bindParam(":type", $data]'type']);
-        // $q->bindParam(":rank", $data]'rank'], PDO::PARAM_INT);
+        $q->bindParam(":name", $data['name']);
+        $q->bindParam(":street", $data['street']);
+        $q->bindParam(":secondary_street", $data['secondary_street']);
+        $q->bindParam(":city", $data['city']);
+        $q->bindParam(":zip", $data['zip']);
+        // $q->bindParam(":bio", $data['bio']);
+        // $q->bindParam(":yelp_link", $data['yelp_link']);
+        // $q->bindParam(":type", $data['type']);
+        // $q->bindParam(":rank", $data['rank'], PDO::PARAM_INT);
         $q->execute();
         return $this->getById($this->db->lastInsertId());
     }
@@ -82,15 +80,15 @@ class foodRepository {
     public function update($data) {
         $sql = "UPDATE food SET name = :name, street = :street, secondary_street = :secondary_street, city = :city, zip = :zip WHERE food_id = :food_id";
         $q = $this->db->prepare($sql);
-        $q->bindParam(":name", $data]'name']);
-        $q->bindParam(":street", $data]'street']);
-        $q->bindParam(":secondary_street", $data]'secondary_street']);
-        $q->bindParam(":city", $data]'city']);
-        $q->bindParam(":zip", $data]'zip']);
-        // $q->bindParam(":bio", $data]'bio']);
-        // $q->bindParam(":yelp_link", $data]'yelp_link']);
-        // $q->bindParam(":type", $data]'type']);
-        // $q->bindParam(":rank", $data]'rank'], PDO::PARAM_INT);
+        $q->bindParam(":name", $data['name']);
+        $q->bindParam(":street", $data['street']);
+        $q->bindParam(":secondary_street", $data['secondary_street']);
+        $q->bindParam(":city", $data['city']);
+        $q->bindParam(":zip", $data['zip']);
+        // $q->bindParam(":bio", $data['bio']);
+        // $q->bindParam(":yelp_link", $data['yelp_link']);
+        // $q->bindParam(":type", $data['type']);
+        // $q->bindParam(":rank", $data['rank'], PDO::PARAM_INT);
         $q->execute();
     }
 

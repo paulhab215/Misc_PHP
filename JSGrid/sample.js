@@ -8,22 +8,24 @@ $(function() {
         $("#jsGrid").jsGrid({
             height: "70%",
             width: "100%",
-            // filtering: true,
-            // inserting: true,
-            // editing: true,
-            // sorting: true,
-            // paging: true,
+            filtering: true,
+            inserting: true,
+            editing: true,
+            sorting: true,
+            paging: true,
             autoload: true,
             pageSize: 10,
             pageButtonCount: 5,
             deleteConfirm: "Do you really want to delete client?",
             controller: {
                 loadData: function(filter) {
-                    alert("lsls");
-                    return $.ajax({
+                 return $.ajax({
                         type: "GET",
                         url: "Restaurants/index.php",
-                        data: filter
+                        dataType: 'json',
+                        success: function (result) {
+                            return result;
+                        },
                     });
                 },
                 insertItem: function(item) {
@@ -51,10 +53,10 @@ $(function() {
 
             fields: [
                 { name: "name", title: "Name", type: "text", width: 150 },
-                { name: "street", title: "street", type: "text", width: 200 },
-                { name: "secondary_street", title: "Secondary_street", type: "text", width: 200 },
-                { name: "city", title: "city", type: "text", width: 200 },
-                { name: "zip", title: "zip", type: "text", width: 200 },
+                { name: "street", title: "Street", type: "text", width: 200 },
+                { name: "secondary_street", title: "Secondary Street", type: "text", width: 200 },
+                { name: "city", title: "City", type: "text", width: 200 },
+                { name: "zip", title: "Zip", type: "text", width: 200 },
                 { type: "control" }
             ]
         });
